@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+	<kathanon.DecayingStructures.DecayRate.title>Decay per day</kathanon.DecayingStructures.DecayRate.title>
+	<kathanon.DecayingStructures.DecayRate.desc>The amount of HP that each building loses per day.</kathanon.DecayingStructures.DecayRate.desc>
+	<kathanon.DecayingStructures.Structures.title>Only affect structures</kathanon.DecayingStructures.Structures.title>
+	<kathanon.DecayingStructures.Structures.desc>Only affect buildings from the "Structures" architect tab.</kathanon.DecayingStructures.Structures.desc>
+	<kathanon.DecayingStructures.Outside.title>Only buildings that are outside</kathanon.DecayingStructures.Outside.title>
+	<kathanon.DecayingStructures.Outside.desc>Only affect buildings that are not in an enclosed and roofed room.</kathanon.DecayingStructures.Outside.desc>
+	<kathanon.DecayingStructures.Owned.title>Only player-owned buildings</kathanon.DecayingStructures.Owned.title>
+	<kathanon.DecayingStructures.Owned.desc>Only affect buildings that are owned by the player.</kathanon.DecayingStructures.Owned.desc>
+</LanguageData>
