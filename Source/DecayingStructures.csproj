@@ -3,7 +3,8 @@
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <ModName>DecayingStructures</ModName>
-    <ModId>kathanon.DecayingStructures</ModId>
+    <ModId>kathanon.$(ModName)</ModId>
+    <MultiVersion>true</MultiVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
@@ -27,27 +28,28 @@
   <ItemGroup>
     <!-- RimWorld DLLs -->
     <Reference Include="Assembly-CSharp" Private="False">
-      <HintPath>$(RimWorld)\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>$(RimWorldDlls)\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule" Private="False">
-      <HintPath>$(RimWorld)\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>$(RimWorldDlls)\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule" Private="False">
-      <HintPath>$(RimWorld)\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>$(RimWorldDlls)\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextRenderingModule" Private="False">
-      <HintPath>$(RimWorld)\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+      <HintPath>$(RimWorldDlls)\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI" Private="False">
-      <HintPath>$(RimWorld)\RimWorldWin64_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>$(RimWorldDlls)\UnityEngine.UI.dll</HintPath>
     </Reference>
-    <!-- Other Dlls -->
-    <Reference Include="0Harmony, Version=2.2.2.0, Culture=neutral, processorArchitecture=MSIL" Private="True">
+    <!-- Mod Dlls -->
+    <Reference Include="0Harmony, Version=2.2.2.0, Culture=neutral, processorArchitecture=MSIL" Private="False">
       <HintPath>..\packages\Lib.Harmony.2.2.2\lib\net472\0Harmony.dll</HintPath>
     </Reference>
-    <Reference Include="HugsLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" Private="True">
-      <HintPath>..\packages\UnlimitedHugs.Rimworld.HugsLib.9.0.1\lib\net472\HugsLib.dll</HintPath>
+    <Reference Include="HugsLib" Private="False">
+      <HintPath>$(HugsLibPath)</HintPath>
     </Reference>
+    <!-- Other Dlls -->
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

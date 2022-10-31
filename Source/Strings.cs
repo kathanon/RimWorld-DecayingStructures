@@ -17,5 +17,7 @@ namespace DecayingStructures
         public static readonly string Outside_desc     = (PREFIX + "Outside.desc"    ).Translate();
         public static readonly string Owned_title      = (PREFIX + "Owned.title"     ).Translate();
         public static readonly string Owned_desc       = (PREFIX + "Owned.desc"      ).Translate();
+        public static readonly string Variance_title   = (PREFIX + "Variance.title"  ).Translate();
+        public static readonly string Variance_desc    = (PREFIX + "Variance.desc"   ).Translate();
     }
 }

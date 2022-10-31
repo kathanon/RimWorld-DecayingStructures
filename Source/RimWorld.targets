@@ -4,14 +4,21 @@
   <PropertyGroup>
     <Steam Condition="'$(Steam)' == ''">C:\Program Files\Steam</Steam>
     <RimWorld>$(Steam)\steamapps\common\RimWorld</RimWorld>
+    <RimWorldDlls>$(RimWorld)\RimWorldWin64_Data\Managed</RimWorldDlls>
+    <RimWorldVersion Condition="'$(RimWorldVersion)' == ''">$([System.IO.File]::ReadAllText("$(RimWorld)\Version.txt").Substring(0,3))</RimWorldVersion>
+    <VersionConst>VERSION_$(RimWorldVersion.Replace(".","_"))</VersionConst>
+    <DefineConstants>$(VersionConst)</DefineConstants>
     <ModsDir>$(RimWorld)\Mods</ModsDir>
     <OutputPath>$(ModsDir)\$(ModName)</OutputPath>
-    <AssembliesSubDir>Assemblies</AssembliesSubDir>
+    <AssembliesSubDir Condition="'$(MultiVersion)' == 'true'">$(RimWorldVersion)\Assemblies</AssembliesSubDir>
+    <AssembliesSubDir Condition="'$(MultiVersion)' != 'true'">Assemblies</AssembliesSubDir>
     <AssembliesDir>$(OutputPath)\$(AssembliesSubDir)</AssembliesDir>
     <ModFiles>..\ModFiles</ModFiles>
     <ModsList>$(LocalAppData)Low\Ludeon Studios\RimWorld by Ludeon Studios\Config\ModsConfig.xml</ModsList>
+    <Workshop>$(Steam)\steamapps\workshop\content\294100</Workshop>
+    <HugsLibPath>$(Workshop)\818773962\v$(RimWorldVersion)\Assemblies\HugsLib.dll</HugsLibPath>
   </PropertyGroup>
-  
+
   <!-- Alter standard stuff -->
   <PropertyGroup>
     <RootNamespace>$(ModName)</RootNamespace>
@@ -29,7 +36,10 @@
     <CopyBackTo>$(ModFiles)\$(SteamIdFile)</CopyBackTo>
     <CopyBackDir>$(ModFiles)\$(SteamIdFileDir)</CopyBackDir>
   </PropertyGroup>
-  <Target Name="BeforeBuild" Condition="Exists('$(CopyBackFrom)') And !Exists('$(CopyBackTo)')">
+  <Target Name="BeforeBuild">
+    <Message Text="Building for RimWorld $(RimWorldVersion)" Importance="high" />
+  </Target>
+  <Target Name="CopySteamId" AfterTargets="BeforeBuild" Condition="Exists('$(CopyBackFrom)') And !Exists('$(CopyBackTo)')">
     <!-- Make sure that the file that the game adds when a mod is published on Steam is copied back to source -->
     <Message Text="Copying mod ID file from mod folder back to $(CopyBackTo)" Importance="high" />
     <Copy SourceFiles="$(CopyBackFrom)" DestinationFolder="$(CopyBackDir)" />

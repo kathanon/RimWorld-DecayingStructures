@@ -28,6 +28,7 @@ namespace DecayingStructures {
         private static SettingHandle<bool> structures;
         private static SettingHandle<bool> outside;
         private static SettingHandle<bool> owned;
+        private static SettingHandle<int>  variance;
 
         private static readonly DesignationCategoryDef Structure = 
             DefDatabase<DesignationCategoryDef>.GetNamed("Structure");
@@ -38,7 +39,15 @@ namespace DecayingStructures {
                 Strings.DecayRate_title,
                 Strings.DecayRate_desc,
                 2);
-            decayRate.CustomDrawer = DrawSlider;
+            decayRate.CustomDrawer = DrawDecaySlider;
+
+            variance = pack.GetHandle(
+                "variance",
+                Strings.Variance_title,
+                Strings.Variance_desc,
+                20);
+            variance.ValueChanged += VarianceUpdated;
+            variance.CustomDrawer = DrawVarianceSlider;
 
             structures = pack.GetHandle(
                 "structures",
@@ -63,22 +72,35 @@ namespace DecayingStructures {
 
             // Avoid any array out of bounds if we lower the number of steps
             if (decayRate >= decaySteps.Length) decayRate.Value = decaySteps.Length - 1;
+
+            // Initialize CompDecay
+            VarianceUpdated(variance);
         }
 
         public static void Updated(SettingHandle _) => Ticker.Rebuild();
 
-        public static bool DrawSlider(Rect rect) {
-            int pos = decayRate;
+        public static void VarianceUpdated(SettingHandle _) => CompDecay.SetVariance(variance / 100f);
+
+        public static bool DrawVarianceSlider(Rect rect) { 
+            return DrawIntSlider(rect, variance, val => $"{val}%", 90); ;
+        }
+
+        public static bool DrawDecaySlider(Rect rect) { 
+            return DrawIntSlider(rect, decayRate, _ => DecayRate.ToString(), decaySteps.Length - 1);
+        }
+
+        public static bool DrawIntSlider(Rect rect, SettingHandle<int> setting, Func<int,string> toString, int max) {
+            int pos = setting;
             Rect label = rect.LeftPartPixels(30f);
             var anchor = Text.Anchor;
             Text.Anchor = TextAnchor.MiddleCenter;
-            Widgets.Label(label, DecayRate.ToString());
+            Widgets.Label(label, toString(pos));
             Text.Anchor = anchor;
             Rect slider = rect;
             slider.xMin += label.width;
             slider.yMin += 2f;
-            decayRate.Value = (int) Widgets.HorizontalSlider(slider, pos, 0f, decaySteps.Length - 1, true, roundTo: 1f);
-            return decayRate.Value != pos;
+            setting.Value = (int) Widgets.HorizontalSlider(slider, pos, 0f, max, true, roundTo: 1f);
+            return setting.Value != pos;
         }
     }
 
