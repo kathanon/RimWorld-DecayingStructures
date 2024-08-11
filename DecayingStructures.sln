@@ -7,9 +7,12 @@ Project("{CFBE7D06-7AFF-4A12-8A0F-77DFA36029AC}") = "DecayingStructures", "Sourc
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E51C10F-7F38-4708-919C-FDBA4609C263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E51C10F-7F38-4708-919C-FDBA4609C263}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E51C10F-7F38-4708-919C-FDBA4609C263}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E51C10F-7F38-4708-919C-FDBA4609C263}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

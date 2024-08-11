@@ -1,34 +1,47 @@
 ﻿using HarmonyLib;
 using RimWorld;
-using RimWorld.SketchGen;
-using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using Verse;
 
-namespace DecayingStructures
-{
-    public class Main : HugsLib.ModBase {
-        public override string ModIdentifier => Strings.MOD_IDENTIFIER;
+namespace DecayingStructures;
 
-        public override void DefsLoaded() {
-            Options.Setup(Settings);
-            SetupDefs();
-        }
+[StaticConstructorOnStartup]
+public class ModMain : Mod {
+    public static ModMain Instance;
 
-        public static void SetupDefs() {
-            var defs = DefDatabase<ThingDef>.AllDefs.Where(d => d.category == ThingCategory.Building);
-            foreach (var def in defs) {
-                if (!def.HasComp(typeof(CompProperties_Decay))) {
-                    def.comps.Add(new CompProperties_Decay());
-                }
-            }
-            Ticker.Setup();
-        }
+    static ModMain()
+        => new Harmony(Strings.ID).PatchAll();
 
-        public override void MapLoaded(Map map) => Ticker.VisitMap(map);
+    public ModMain(ModContentPack content) : base(content) 
+        => Instance = this;
 
-        public override void MapDiscarded(Map map) => Ticker.Rebuild();
-
-        public override void Tick(int currentTick) => Ticker.Tick(currentTick);
+    public void Setup() {
+        Options.Setup(this);
+        SetupDefs();
+        Ticker.Setup();
     }
+
+    private static void SetupDefs() {
+        var defs = DefDatabase<ThingDef>.AllDefs.Where(d => d.category == ThingCategory.Building);
+        foreach (var def in defs) {
+            if (!def.HasComp(typeof(CompProperties_Decay))) {
+                def.comps.Add(new CompProperties_Decay());
+            }
+        }
+    }
+
+    public override void DoSettingsWindowContents(Rect inRect) 
+        => Options.DoGUI(inRect);
+
+    public override string SettingsCategory() 
+        => Strings.Name;
+}
+
+[HarmonyPatch]
+public static class DefsLoadedHook {
+    [HarmonyPatch(typeof(MainMenuDrawer), nameof(MainMenuDrawer.Init))]
+    [HarmonyPostfix]
+    public static void Init() 
+        => ModMain.Instance.Setup();
 }

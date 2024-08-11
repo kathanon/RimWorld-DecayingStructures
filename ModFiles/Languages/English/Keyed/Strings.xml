@@ -2,6 +2,8 @@
 <LanguageData>
 	<kathanon.DecayingStructures.DecayRate.title>Decay per day</kathanon.DecayingStructures.DecayRate.title>
 	<kathanon.DecayingStructures.DecayRate.desc>The amount of HP that each building loses per day.</kathanon.DecayingStructures.DecayRate.desc>
+	<kathanon.DecayingStructures.DecayStep.title>Damage threshold</kathanon.DecayingStructures.DecayStep.title>
+	<kathanon.DecayingStructures.DecayStep.desc>The amount of HP lost at a time. The damage accrues up to this threshold before being applied to the building.</kathanon.DecayingStructures.DecayStep.desc>
 	<kathanon.DecayingStructures.Variance.title>Variation in decay</kathanon.DecayingStructures.Variance.title>
 	<kathanon.DecayingStructures.Variance.desc>The amount that the decay rate varies between buildings.</kathanon.DecayingStructures.Variance.desc>
 	<kathanon.DecayingStructures.Structures.title>Only affect structures</kathanon.DecayingStructures.Structures.title>
@@ -10,4 +12,12 @@
 	<kathanon.DecayingStructures.Outside.desc>Only affect buildings that are not in an enclosed and roofed room.</kathanon.DecayingStructures.Outside.desc>
 	<kathanon.DecayingStructures.Owned.title>Only player-owned buildings</kathanon.DecayingStructures.Owned.title>
 	<kathanon.DecayingStructures.Owned.desc>Only affect buildings that are owned by the player.</kathanon.DecayingStructures.Owned.desc>
+	<kathanon.DecayingStructures.Ancient.title>Affect ancient dangers</kathanon.DecayingStructures.Ancient.title>
+	<kathanon.DecayingStructures.Ancient.desc>Also affect parts of ancient dangers.
+Warning: When active, this will cause ancient dangers to open spontaneously when the walls have decayed.</kathanon.DecayingStructures.Ancient.desc>
+	<kathanon.DecayingStructures.HomeArea.title>Limit by home area</kathanon.DecayingStructures.HomeArea.title>
+	<kathanon.DecayingStructures.HomeArea.desc>Only affect buildings that are inside or outside of home area.</kathanon.DecayingStructures.HomeArea.desc>
+	<kathanon.DecayingStructures.HomeArea.All>No</kathanon.DecayingStructures.HomeArea.All>
+	<kathanon.DecayingStructures.HomeArea.Inside>Only inside</kathanon.DecayingStructures.HomeArea.Inside>
+	<kathanon.DecayingStructures.HomeArea.Outside>Only outside</kathanon.DecayingStructures.HomeArea.Outside>
 </LanguageData>
